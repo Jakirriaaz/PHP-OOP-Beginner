@@ -646,3 +646,67 @@ $table->numRows = 0;
 	</body>
 
 </html>
+
+<?php 
+	//Iterable keyword
+function printIterable(iterable $myIterable){
+	foreach($myIterable as $item){
+		echo $item;
+	}
+}
+
+$arr = ["a", "b", "c"];
+printIterable($arr);
+?>
+
+<?php 
+	//Return Example
+function getIterable():iterable{
+	return ["a", "b", "c"];
+}
+
+$myIterable = getIterable();
+foreach($myIterable as $item){
+	echo $item;
+}
+?>
+
+<?php 
+	//Creating Iterator - Implement the Iterator interface 
+class MyIterator implements Iterator{
+	private $items = [];
+	pirvate $pointer = 0;
+	
+	public function __construct($items){
+		//arrya_value() makes sure that the keys are  numbers
+		$this->items = array_values($itmes);
+	}
+	public function current(){
+		return $this->items[$this->pointer];
+	}
+	public function key(){
+		return $this->pointer;
+	}
+	public function next(){
+		$this->pointer++;
+	}
+	public function rewind(){
+		$this->pointer = 0;
+	}
+	public function valid(){
+		//count() indicates how many items are in the list
+		return $this->pointer < count($this->items);
+	}
+}
+
+// A function that uses iterables 
+	function printIterable(iterable $myIterable){
+		foreach($myIterable as $item){
+			echo $item;
+		}
+	}
+
+// Use the iterator as an iterable
+	$iterator = new MyIterator (["a", "b", "c"]);
+	printIterable($iterator);
+?>
