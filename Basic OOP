@@ -1,0 +1,648 @@
+<?php 
+
+
+class Fruit {
+	//Properties
+	public $name;
+	public $color;
+	
+	//Methods
+	function set_name($name){
+		$this->name = $name;
+	}
+	function set_name(){
+		return $this->name;
+	}
+	
+	function set_color($color){
+		$this->color = $color;
+	}
+	function set_color(){
+		return $this->color;
+	}
+}
+
+$apple 	= new Fruit();
+$apple->set_name('Apple');
+$apple->set_color('Red');
+
+echo "Name: ".$apple->get_name();
+echo "<br>";
+echo "Color: ".$apple->get_color();
+
+?>
+
+
+<?php 
+
+// inside 0f class
+
+class Fruit{
+	public $name;
+	function set_name($name){
+		$this->name = $name;
+	}
+}
+
+$apple = new Fruit();
+$apple->set_name("Apple");
+
+echo $apple->name;
+
+?>
+
+<?php 
+
+// outsite of class
+
+class Fruit{
+	public $name;
+}
+
+$apple = new Fruit();
+$apple->name = "Apple";
+
+echo $apple->name;
+
+?>
+
+<?php 
+
+$apple = new Fruit();
+
+var_dump($aplle instanceof Fruit);
+
+?> 
+
+<?php 
+
+	// __Construct Functions
+	
+class Fruit{
+	public $name;
+	public $color;
+	
+	function __construct($name){
+		$this->name = $name;
+	}
+	function get_name(){
+		return $this->name;
+	}
+}
+
+$apple = new Fruit("Apple");
+
+echo $apple->get_name();
+
+?>
+
+<?php 
+	// __Construct Functions
+class Fruit {
+	public $name;
+	public $color;
+	
+	function __construct($name, $color) {
+		$this->name		= $name;
+		$this->color	= $color;
+	}
+	function get_name(){
+		return $this->name;
+	}
+	function get_color(){
+		return $this->color;
+	}
+}
+
+$apple = new Fruit("Apple", "Red");
+
+echo $apple->get_name();
+echo "<br>";
+echo $apple->get_color();
+?>
+
+<?php 
+
+	//__destruct Function
+
+class Fruit{
+	public $name;
+	public $color;
+	
+	function __construct($name){
+		$this->name = $name;
+	}
+	function __destruct(){
+		echo "The fruit is {$this->name}.";
+	}
+}
+
+$aplle = new Fruit("Apple");
+?>
+
+<?php 
+
+class Fruit{
+	public $name;
+	public $color;
+	
+	function __construct($name, $color){
+		$this->name		= $name;
+		$this->color	= $color;
+	}
+	function __destruct(){
+		echo "The fruit is {$this->name} and the color is {$this->color}.";
+	}
+}
+
+$apple = new Fruit("Apple", "Red");
+?>
+
+<?php 
+	//Properties Modifier Access
+class Fruit{
+	public $name;
+	protected $color;
+	private $weight;
+}
+
+$mango = new Fruit();
+$mango->name = 'Mango'; // OK
+$mango->color = 'Green'; // error
+$mango->weight = '300' //ERROR
+
+?>
+
+<?php 
+	//Method Modifier Access
+class Fruit{
+	public $name;
+	public $color;
+	public $weight;
+	
+	function set_name($n) { // a public function (default)
+		$this->name = $n;
+	}
+	protected function set_color($n) { //a protected function
+		$this-color = $n;
+	}
+	private function set_weight($n) { // a private function
+		$this->weight = $n;
+	}
+}
+
+$mango = new Fruit();
+$mango->set_name("Mango"); //OK
+$mango->set_color("Red"); //error
+$mango->set_weight("300"); //ERROR
+
+?>
+
+<?php 
+	//Inheritance useing extends keyword
+class Fruit{
+	public $name;
+	public $color;
+	public function __construct($name, $color){
+		$this->name = $name;
+		$this->color = $color;
+	}
+	public function intro(){
+		echo "The fruit is {$this->name} and the color is {$this->color}.";
+	}
+}
+
+	// Strawberry is inherited form Fruit
+class Strawberry extends Fruit {
+	public function message(){
+		echo "Am I a fruit or berry? "
+	}
+}
+
+$strawberry = new Strawberry("Strawberry", "Red");
+
+$strawberry->intro();
+$strawberry->message();
+?>
+
+<?php 
+	//Inheritance and the protected access modifier
+class Fruit{
+	public $name;
+	public $color;
+	public function __construct("$name", "color"){
+		$this->name = $name;
+		$this->color = $color;
+		
+	}
+	protected function intro(){
+		echo "This fruit is {$this-name} and the color is {$this-color}.";
+	}
+}
+
+class Strawberry extends Fruit {
+	public function message(){
+		echo "Am I a fruit or a berry? ";
+	}
+}
+
+$strawberry = new Strawberry("Strawberry", "Red");
+$strawberry->message(); //OK message() is public
+$strawberry->intro(); //error. intro() is protected
+?>
+
+<?php 
+class Fruit {
+	public $name;
+	public $color;
+	public function __construct($name, $color){
+		$this->name		= $name;
+		$this->color	= $color;
+	}
+	protected function intro(){
+		echo "The fruit is {$this->name} and the color is {$this->color}.";
+	}
+}
+
+class Strawberry extends Fruit {
+	public function message(){
+		echo "Am I fruit or a berry?";
+		// Call protected method from within derived class - OK
+		$this-> intro();
+	}
+}
+
+$strawberry = new Strawberry("Strawberry", "Red");
+$strawberry->message(); //OK. message()  is public and it calls intro() (whic is protected) from within  the derived class
+?>
+
+<?php 
+	//Overridding Inheritance Methodes
+class Fruit{
+	public $name;
+	public $color;
+	public function __costruct($name, $color){
+		$this->name	= $name;
+		$this->color= $color
+	}
+	public function intro(){
+		echo "The fruit is {$this->name} and the color is {$this->color}.";
+	}
+}
+
+class Strawberry extends Fruit {
+	public $weight;
+	public function __construct($name, $color, $weight){
+		$this->name	= $name;
+		$this->color= $color;
+		$this_weight= $weight;
+	}
+	public function intro(){
+		echo "The fruit is {$this->name}, the color is {$this->color}, and the weight is {$this->weight} gram.";
+	}
+}
+
+$strawberry = new Strawberry("Strawberry", "REd", 50);
+$strawberry->intro();
+?>
+
+<?php 
+	//Final keyword
+	
+class Fruit{
+	final public function intro(){
+		// some code
+	}
+}
+
+class Strawberry extends Fruit{
+	//will result in error
+	public function intro(){
+		//some code
+	}
+}
+?>
+
+<?php 
+// constanct keywork "const" [outside of class]
+class Goodby{
+	const GIVING_MESSAGE = "Thank yu for learn me"; 
+}
+
+echo Goodby::GIVING_MESSAGE;
+?>
+
+<?php 
+// constanct keywork "const" [inside of class by "self"]
+class Goodby {
+	const LIVING_MESSAGE = "Thank you for teach me";
+	public function byby(){
+		echo self::LIVING_MESSAGE;
+	}
+}
+
+$goodby = new Goodby();
+$goodby->byby();
+?>
+
+
+<?php 
+	//abstract class and method
+abstract class ParentClass{
+	abstract public function someMethod1();
+	abstract public function someMethod2($name, $color);
+	abstract public function someMethod3() :string;
+}
+?>
+
+<?php 
+	//Abstract class and method
+abstract class Car{
+	public $name;
+	public function __construct($name){
+		$this->name = $name;
+	}
+	abstract public function intro() : string;
+}
+	// Child class
+class Audi extends Car{
+	public function intro() : string{
+		return "Choose German quality! I'm an $this->name!";
+	}
+}
+
+class Volvo extends Car{
+	public function intro() : string {
+		return "Proud to be swedish! I'm a $this->name! ";
+	}
+}
+
+class Citroen extends Car{
+	public function intro(){
+		return "French extravagance! I'm a $this->name!";
+	}
+}
+
+	//Create object from the child classes
+$audi = new audi("Audi");
+echo $audi->intro();
+echo "<br>";
+
+$volvo = new volvo("Volvo");
+echo $volvo->intro();
+echo "<br>";
+
+$citroen = new citroen("Citroen");
+echo $citroen->intro();
+?>
+
+<?php 
+	// Another example of abstract class
+abstract class ParentClass{
+	abstract protected function prefixName($name);
+	
+}
+class ChildClass extends ParentClass{
+	public function prefixName($name){
+		if ($name == "John Doe") {
+			$prefix = "Mr.";
+		}elseif($name == "Jane Doe"){
+			$prefix = "Mrs.";
+		}else {
+			$prefix = "";
+		}
+		return "{$prefix} {$name}";
+	}
+}
+
+$class = new ChildClass;
+echo $class->prefixName(John Doe);
+echo $class->prefixNmae(Jane Doe);
+?>
+
+<?php 
+abstract class ParentClass{
+	abstract protected function prefixName($name);
+}
+
+class ChildClass extends ParentClass{
+	public function prefixName($name, $separator=".", $greet = "Dear") {
+		if($name== "John Doe"){
+			$prefix = "Mr";
+		}elseif($name == "Jane Doe"){
+			$prefix = "Mrs";
+		}else{
+			$prefix = "";
+		}
+	return "{$sreet} {$prefix}{$separator} {$name}";
+	}
+}
+
+$class = new ChildClass;
+echo $class->prefixName("John Doe");
+echo $class->prefixName("Jane Doe");
+?>
+
+<?php 
+	//Interfacde
+interface Animal{
+	public function makeSound();
+}
+
+class Cat implements Animal{
+	public function makeSound(){
+		echo "Meow";
+	}
+}
+
+$animal = new Cat();
+$animal->makeSound();
+?>
+
+<?php 
+interface Animal{
+	public function makeSound();
+}
+
+class Cat implements Animal{
+	public function makeSound(){
+		echo "Meow";
+	}
+}
+
+class Dog implements Animal{
+	public function makeSound(){
+		echo "Bark";
+	}
+}
+
+class Mouse implements Animal{
+	public function makeSound(){
+		echo "Squeak";
+	}
+}
+	//create a list of animals
+$cat = new Cat();
+$dog = new Dog();
+$mouse=new Mouse();
+$animals = array($cat, $dog, $mouse);
+
+foreach($asnimals as $animal){
+	$animal->makeSound();
+}
+?>
+
+<?php 
+
+	//Traits keyword
+trait message1 {
+	public function msg1(){
+		echo "OOp is fun!";
+	}
+}
+
+class Welcome{
+	use message1;
+}
+
+$boj = new Welcom();
+$boj->msg1();
+?>
+
+<?php 
+trait message1{
+	public function msg1(){
+		echo "OOP is fun!";
+	}
+}
+
+trait message2{
+	public function msg2(){
+		echo "OOP reduce code duplication!";
+	}
+}
+
+class Welcome{
+	use message1;
+}
+
+class Welcome2 {
+	use message1, message2;
+}
+
+$obj = new Welcome();
+$obj->msg1();
+echo "<br>";
+
+$obj = new Welcome2();
+$obj->msg1();
+$obj->msg2();
+?>
+
+<?php 
+	//Static Methods
+class ClassName{
+	public static function Welcome(){
+		echo "WElcome to the channel";
+	}
+}
+
+ClassName::Welcome();
+?>
+
+<?php 
+	//Using self keyword
+class Greeting{
+	public static function welcome(){
+		echo "HI Gusy";
+	}
+	public function __construct(){
+		self::welcome();
+	}
+}
+new Greeting();
+?>
+
+<?php 
+class greeting{
+	public static function welcome(){
+		echo "Hello World";
+	}
+}
+class fromotherClass{
+	public function msg(){
+		greeting::welcome();
+	}
+}
+?>
+
+<?php 
+class domain{
+	public static function getWebSite(){
+		return "jaak.com";
+	}
+}
+class domainchild extends domain{
+	public $website;
+	public function __construct(){
+		$this-website = parent::getWebSite();
+	}
+}
+
+$domainW = new domainchild;
+echo $domainW->website;
+?>
+
+<?php 
+	//Static Properties
+class hi {
+	public static $value=4.5555;
+	public function staticvalue(){
+		return self::value;
+	}
+}
+
+$hi = new hi();
+echo $hi->staticvalue();
+?>
+
+<?php
+	//Inside child class call parent keyword
+class hi {
+	public static $value=45.5455;
+	
+}
+
+class hello extends hi {
+	public function xStatic(){
+		return parent::$value;
+	}
+}
+
+echo x::value;
+$x= new x();
+echo $x->xStatic();
+?>
+
+<?php 
+	//namespace
+namespace html;
+class Table{
+	public $title = "";
+	public $numRows = 0;
+	public function message(){
+	echo "<p>Table '{$this->title}' has {$this->numRows} rows.</p>";
+	}
+}
+$table = new Table();
+$table->title = "My table";
+$table->numRows = 0;
+?>
+
+<!DOCTYPE html>
+<html>
+	<body>
+		<?php $table->message(); ?>
+	</body>
+
+</html>
